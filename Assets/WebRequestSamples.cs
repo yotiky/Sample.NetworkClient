@@ -9,19 +9,6 @@ using UnityEngine.Networking;
 
 public class WebRequestSamples : MonoBehaviour
 {
-    //WebRequestModel model;
-
-    //void Start()
-    //{
-    //    model = new WebRequestModel();
-    //    model.DownloadDataAsync("https://google.co.jp")
-    //        .Subscribe(response =>
-    //        {
-    //            Debug.Log("Subscribed:" + response);
-    //        })
-    //        .AddTo(this);
-    //}
-
     const string url = "https://zipcloud.ibsnet.co.jp/api/search";
     const string key = "zipcode";
     const int zipcode = 1000005;
@@ -100,7 +87,7 @@ public class WebRequestSamples : MonoBehaviour
             observer.OnCompleted();
         }
     }
-    public async UniTask<string> GetRequestAsync()
+    private async UniTask<string> GetRequestAsync()
     {
         var request = UnityWebRequest.Get(url + query);
         await request.SendWebRequest();
@@ -143,7 +130,7 @@ public class WebRequestSamples : MonoBehaviour
         {
             // 画像(バイナリ)を送信する場合
             //var postData = new byte[0];
-            //form.AddBinaryData("image", postData, "sample.png", "image/ping");
+            //form.AddBinaryData("image", postData, "sample.png", "image/png");
         }
         {
             // ヘッダを付けて、画像(バイナリ)を送信する場合
@@ -190,7 +177,7 @@ public class WebRequestSamples : MonoBehaviour
             observer.OnCompleted();
         }
     }
-    public async UniTask<string> PostRequestAsync()
+    private async UniTask<string> PostRequestAsync()
     {
         var form = new WWWForm();
         form.AddField(key, zipcode);

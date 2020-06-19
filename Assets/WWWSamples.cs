@@ -81,7 +81,7 @@ public class WWWSamples : MonoBehaviour
             observer.OnCompleted();
         }
     }
-    public void GetRequestObservable()
+    private void GetRequestObservable()
     {
         var progress = new ScheduledNotifier<float>();
         progress.Subscribe(prog => Debug.Log(prog))
@@ -94,7 +94,7 @@ public class WWWSamples : MonoBehaviour
                 () => Debug.Log("completed."))
             .AddTo(this);
     }
-    public async UniTask<string> GetRequestAsync()
+    private async UniTask<string> GetRequestAsync()
     {
         var www = new WWW(url + query);
         await www;
@@ -140,7 +140,7 @@ public class WWWSamples : MonoBehaviour
         {
             // 画像(バイナリ)を送信する場合
             //var postData = new byte[0];
-            //form.AddBinaryData("image", postData, "sample.png", "image/ping");
+            //form.AddBinaryData("image", postData, "sample.png", "image/png");
         }
         {
             // ヘッダを付けて、画像(バイナリ)を送信する場合
@@ -186,7 +186,7 @@ public class WWWSamples : MonoBehaviour
             observer.OnCompleted();
         }
     }
-    public void PostRequestObservable()
+    private void PostRequestObservable()
     {
         var form = new WWWForm();
         form.AddField(key, zipcode);
@@ -199,7 +199,7 @@ public class WWWSamples : MonoBehaviour
             .Subscribe(x => Debug.Log(x))
             .AddTo(this);
     }
-    public async UniTask<string> PostRequestAsync()
+    private async UniTask<string> PostRequestAsync()
     {
         var form = new WWWForm();
         form.AddField(key, zipcode);
