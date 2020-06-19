@@ -19,16 +19,15 @@ public class WebRequestSamples : MonoBehaviour
     public async UniTaskVoid Get()
     {
         // Coroutine
-        //StartCoroutine("GetRequestCoroutine");
+        StartCoroutine("GetRequestCoroutine");
 
         // Convert to Observable
-        //Observable.FromCoroutine<string>(observer => GetRequestCoroutine(observer))
-        //    .Subscribe(x => Debug.Log(x))
-        //    .AddTo(this);
+        Observable.FromCoroutine<string>(observer => GetRequestCoroutine(observer))
+            .Subscribe(x => Debug.Log(x))
+            .AddTo(this);
 
         // Async
-        //var res = await GetRequestAsync();
-        //Debug.Log(res);
+        await GetRequestAsync();
 
         /* Convert to Observable
         // 呼び出しと同時に実行される(Hot)
@@ -56,7 +55,7 @@ public class WebRequestSamples : MonoBehaviour
         }
         else
         {
-            Debug.Log("get success.");
+            Debug.Log($"get success. {nameof(WebRequestSamples)}.{nameof(GetRequestCoroutine)}");
             Debug.Log(request.downloadHandler.text);
 
             {
@@ -82,12 +81,12 @@ public class WebRequestSamples : MonoBehaviour
         }
         else
         {
-            Debug.Log("get success.");
+            Debug.Log($"get success. {nameof(WebRequestSamples)}.{nameof(GetRequestCoroutine)}");
             observer.OnNext(request.downloadHandler.text);
             observer.OnCompleted();
         }
     }
-    private async UniTask<string> GetRequestAsync()
+    private async UniTask GetRequestAsync()
     {
         var request = UnityWebRequest.Get(url + query);
         await request.SendWebRequest();
@@ -95,12 +94,11 @@ public class WebRequestSamples : MonoBehaviour
         if (request.isHttpError || request.isNetworkError)
         {
             Debug.Log("get failure.");
-            return null;
         }
         else
         {
-            Debug.Log("get success.");
-            return request.downloadHandler.text;
+            Debug.Log($"get success. {nameof(WebRequestSamples)}.{nameof(GetRequestAsync)}");
+            Debug.Log(request.downloadHandler.text);
         }
     }
 
@@ -111,16 +109,15 @@ public class WebRequestSamples : MonoBehaviour
     public async UniTaskVoid Post()
     {
         // Coroutine
-        //StartCoroutine("PostRequestCoroutine");
-
+        StartCoroutine("PostRequestCoroutine");
+        
         // Convert to Observable
-        //Observable.FromCoroutine<string>(observer => PostRequestCoroutine(observer))
-        //    .Subscribe(x => Debug.Log(x))
-        //    .AddTo(this);
+        Observable.FromCoroutine<string>(observer => PostRequestCoroutine(observer))
+            .Subscribe(x => Debug.Log(x))
+            .AddTo(this);
 
         // Async
-        //var res = await PostRequestAsync();
-        //Debug.Log(res);
+        await PostRequestAsync();
     }
     private IEnumerator PostRequestCoroutine()
     {
@@ -149,12 +146,12 @@ public class WebRequestSamples : MonoBehaviour
 
         if (request.isHttpError || request.isNetworkError)
         {
-            Debug.Log("get failure.");
+            Debug.Log("post failure.");
             Debug.Log(request.error);
         }
         else
         {
-            Debug.Log("get success.");
+            Debug.Log($"post success. {nameof(WebRequestSamples)}.{nameof(PostRequestCoroutine)}");
             Debug.Log(request.downloadHandler.text);
         }
     }
@@ -172,12 +169,12 @@ public class WebRequestSamples : MonoBehaviour
         }
         else
         {
-            Debug.Log("post success.");
+            Debug.Log($"post success. {nameof(WebRequestSamples)}.{nameof(PostRequestCoroutine)}");
             observer.OnNext(request.downloadHandler.text);
             observer.OnCompleted();
         }
     }
-    private async UniTask<string> PostRequestAsync()
+    private async UniTask PostRequestAsync()
     {
         var form = new WWWForm();
         form.AddField(key, zipcode);
@@ -188,12 +185,11 @@ public class WebRequestSamples : MonoBehaviour
         if (request.isHttpError || request.isNetworkError)
         {
             Debug.Log("post failure.");
-            return null;
         }
         else
         {
-            Debug.Log("post success.");
-            return request.downloadHandler.text;
+            Debug.Log($"post success. {nameof(WebRequestSamples)}.{nameof(PostRequestAsync)}");
+            Debug.Log(request.downloadHandler.text);
         }
     }
 
