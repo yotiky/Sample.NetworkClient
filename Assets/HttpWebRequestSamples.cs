@@ -23,14 +23,13 @@ public class HttpWebRequestSamples : MonoBehaviour
         GetRequestCallback();
 
         // Observable
-        //GetRequestObservable1();
+        GetRequestObservable1();
 
-        // Observable (does'nt work)
-        //GetRequestObservable2();
+        // Observable
+        GetRequestObservable2();
 
         // Async
-        //var res = await GetRequestAsync();
-        //Debug.Log(res);
+        await GetRequestAsync();
     }
     private void GetRequestCallback()
     {
@@ -52,7 +51,7 @@ public class HttpWebRequestSamples : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("get success.");
+                        Debug.Log($"get success. {nameof(HttpWebRequestSamples)}.{nameof(GetRequestCallback)}");
                         using (var reader = new StreamReader(response.GetResponseStream()))
                         {
                             var text = reader.ReadToEnd();
@@ -77,6 +76,8 @@ public class HttpWebRequestSamples : MonoBehaviour
             {
                 var request = WebRequest.Create(url + query);
                 var response = request.GetResponse();
+                Debug.Log($"get success. {nameof(HttpWebRequestSamples)}.{nameof(GetRequestObservable1)}");
+
                 using (var reader = new StreamReader(response.GetResponseStream()))
                 {
                     return reader.ReadToEnd();
@@ -87,7 +88,6 @@ public class HttpWebRequestSamples : MonoBehaviour
     }
     private void GetRequestObservable2()
     {
-        // await xx.GetresponseAsObservable() すれば動くが IObservable のままメソッドチェーンにすると動かなかった
         WebRequest.Create(url + query)
             .GetResponseAsObservable()
             .Select(res =>
@@ -98,18 +98,25 @@ public class HttpWebRequestSamples : MonoBehaviour
                 }
             })
             .Subscribe(
-                x => Debug.Log(x),
+                x =>
+                {
+                    Debug.Log($"get success. {nameof(HttpWebRequestSamples)}.{nameof(GetRequestObservable2)}");
+                    Debug.Log(x);
+                },
                 error => Debug.Log(error.Message),
                 () => Debug.Log("completed."))
             .AddTo(this);
     }
-    private async UniTask<string> GetRequestAsync()
+    private async UniTask GetRequestAsync()
     {
         var request = WebRequest.Create(url + query);
         var response = await request.GetResponseAsync();
+        Debug.Log($"get success. {nameof(HttpWebRequestSamples)}.{nameof(GetRequestAsync)}");
+
         using (var reader = new StreamReader(response.GetResponseStream()))
         {
-            return reader.ReadToEnd();
+            var text = reader.ReadToEnd();
+            Debug.Log(text);
         }
     }
 
@@ -126,8 +133,7 @@ public class HttpWebRequestSamples : MonoBehaviour
         PostRequestObservable();
 
         // Async
-        var res = await PostRequestAsync();
-        Debug.Log(res);
+        await PostRequestAsync();
     }
     private void PostRequestCallback()
     {
@@ -174,11 +180,11 @@ public class HttpWebRequestSamples : MonoBehaviour
                 var response = (HttpWebResponse)request.EndGetResponse(x);
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    Debug.Log("get failure.");
+                    Debug.Log("post failure.");
                 }
                 else
                 {
-                    Debug.Log("get success.");
+                    Debug.Log($"post success. {nameof(HttpWebRequestSamples)}.{nameof(PostRequestCallback)}");
                     using (var reader = new StreamReader(response.GetResponseStream()))
                     {
                         var text = reader.ReadToEnd();
@@ -213,6 +219,8 @@ public class HttpWebRequestSamples : MonoBehaviour
                 {
                     stream.Write(data, 0, data.Length);
                 }
+
+                Debug.Log($"post success. {nameof(HttpWebRequestSamples)}.{nameof(PostRequestObservable)}");
                 var response = request.GetResponse();
                 using (var reader = new StreamReader(response.GetResponseStream()))
                 {
@@ -222,7 +230,7 @@ public class HttpWebRequestSamples : MonoBehaviour
             .Subscribe(x => Debug.Log(x))
             .AddTo(this);
     }
-    private async UniTask<string> PostRequestAsync()
+    private async UniTask PostRequestAsync()
     {
         var request = WebRequest.Create(url);
         request.Method = "POST";
@@ -237,10 +245,12 @@ public class HttpWebRequestSamples : MonoBehaviour
             stream.Write(data, 0, data.Length);
         }
 
+        Debug.Log($"post success. {nameof(HttpWebRequestSamples)}.{nameof(PostRequestAsync)}");
         var response = await request.GetResponseAsync();
         using (var reader = new StreamReader(response.GetResponseStream()))
         {
-            return reader.ReadToEnd();
+            var text = reader.ReadToEnd();
+            Debug.Log(text);
         }
     }
 
