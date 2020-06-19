@@ -17,19 +17,18 @@ public class WWWSamples : MonoBehaviour
     public async UniTaskVoid Get()
     {
         // Coroutine
-        //StartCoroutine("GetRequestCoroutine");
+        StartCoroutine("GetRequestCoroutine");
 
         // Convert to Observable
-        //Observable.FromCoroutine<string>(observer => GetRequestCoroutine(observer))
-        //    .Subscribe(x => Debug.Log(x))
-        //    .AddTo(this);
+        Observable.FromCoroutine<string>(observer => GetRequestCoroutine(observer))
+            .Subscribe(x => Debug.Log(x))
+            .AddTo(this);
 
         // Observable
-        //GetRequestObservable();
+        GetRequestObservable();
 
         // Async
-        //var res = await GetRequestAsync();
-        //Debug.Log(res);
+        await GetRequestAsync();
     }
     private IEnumerator GetRequestCoroutine()
     {
@@ -50,7 +49,7 @@ public class WWWSamples : MonoBehaviour
         }
         else
         {
-            Debug.Log("get success.");
+            Debug.Log($"get success. {nameof(WWWSamples)}.{nameof(GetRequestCoroutine)}");
             Debug.Log(www.text);
 
             {
@@ -61,7 +60,6 @@ public class WWWSamples : MonoBehaviour
                 //var data = Newtonsoft.Json.JsonConvert.DeserializeObject<ResponseData>(www.text);
                 // Utf8Json : neuecc作、JsonUtilityと同じくらいの速さで汎用的
                 //var data = Utf8Json.JsonSerializer.Deserialize<ResponseData>(www.text);
-
             }
         }
     }
@@ -76,7 +74,7 @@ public class WWWSamples : MonoBehaviour
         }
         else
         {
-            Debug.Log("get success.");
+            Debug.Log($"get success. {nameof(WWWSamples)}.{nameof(GetRequestCoroutine)}");
             observer.OnNext(www.text);
             observer.OnCompleted();
         }
@@ -89,12 +87,16 @@ public class WWWSamples : MonoBehaviour
 
         ObservableWWW.Get(url + query, null, progress)
             .Subscribe(
-                x => Debug.Log(x),
+                x => 
+                {
+                    Debug.Log($"get success. {nameof(WWWSamples)}.{nameof(GetRequestObservable)}");
+                    Debug.Log(x);
+                },
                 ex => Debug.Log(ex.Message),
                 () => Debug.Log("completed."))
             .AddTo(this);
     }
-    private async UniTask<string> GetRequestAsync()
+    private async UniTask GetRequestAsync()
     {
         var www = new WWW(url + query);
         await www;
@@ -102,12 +104,11 @@ public class WWWSamples : MonoBehaviour
         if (www.error != null)
         {
             Debug.Log("get failure.");
-            return null;
         }
         else
         {
-            Debug.Log("get success.");
-            return www.text;
+            Debug.Log($"get success. {nameof(WWWSamples)}.{nameof(GetRequestAsync)}");
+            Debug.Log(www.text);
         }
     }
 
@@ -121,16 +122,15 @@ public class WWWSamples : MonoBehaviour
         StartCoroutine("PostRequestCoroutine");
 
         // Convert to Observable
-        //Observable.FromCoroutine<string>(observer => PostRequestCoroutine(observer))
-        //    .Subscribe(x => Debug.Log(x))
-        //    .AddTo(this);
+        Observable.FromCoroutine<string>(observer => PostRequestCoroutine(observer))
+            .Subscribe(x => Debug.Log(x))
+            .AddTo(this);
 
         // Observable
-        //PostRequestObservable();
+        PostRequestObservable();
 
         // Async
-        //var res = await PostRequestAsync();
-        //Debug.Log(res);
+        await PostRequestAsync();
     }
     private IEnumerator PostRequestCoroutine()
     {
@@ -163,7 +163,7 @@ public class WWWSamples : MonoBehaviour
         }
         else
         {
-            Debug.Log("post success.");
+            Debug.Log($"post success. {nameof(WWWSamples)}.{nameof(PostRequestCoroutine)}");
             Debug.Log(www.text);
         }
     }
@@ -181,7 +181,7 @@ public class WWWSamples : MonoBehaviour
         }
         else
         {
-            Debug.Log("post success.");
+            Debug.Log($"post success. {nameof(WWWSamples)}.{nameof(PostRequestCoroutine)}");
             observer.OnNext(www.text);
             observer.OnCompleted();
         }
@@ -196,10 +196,14 @@ public class WWWSamples : MonoBehaviour
             .AddTo(this);
 
         ObservableWWW.Post(url, form, progress)
-            .Subscribe(x => Debug.Log(x))
+            .Subscribe(x =>
+            {
+                Debug.Log($"post success. {nameof(WWWSamples)}.{nameof(PostRequestObservable)}");
+                Debug.Log(x);
+            })
             .AddTo(this);
     }
-    private async UniTask<string> PostRequestAsync()
+    private async UniTask PostRequestAsync()
     {
         var form = new WWWForm();
         form.AddField(key, zipcode);
@@ -210,12 +214,11 @@ public class WWWSamples : MonoBehaviour
         if (www.error != null)
         {
             Debug.Log("post failure.");
-            return null;
         }
         else
         {
-            Debug.Log("post success.");
-            return www.text;
+            Debug.Log($"post success. {nameof(WWWSamples)}.{nameof(PostRequestAsync)}");
+            Debug.Log(www.text);
         }
     } 
 
