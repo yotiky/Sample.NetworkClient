@@ -12,7 +12,7 @@ public class HttpWebRequestSamples : MonoBehaviour
 {
     const string url = "https://zipcloud.ibsnet.co.jp/api/search";
     const string key = "zipcode";
-    const int zipcode = 7830060;
+    const int zipcode = 1500042;
     string query = $"?{key}={zipcode}";
 
     #region GET
@@ -20,13 +20,13 @@ public class HttpWebRequestSamples : MonoBehaviour
     public async UniTaskVoid Get()
     {
         // Callback
-        //GetRequestCallback();
+        GetRequestCallback();
 
         // Observable
         //GetRequestObservable1();
 
         // Observable (does'nt work)
-        GetRequestObservable2().Forget();
+        //GetRequestObservable2();
 
         // Async
         //var res = await GetRequestAsync();
