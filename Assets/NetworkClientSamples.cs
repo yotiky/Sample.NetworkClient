@@ -8,7 +8,10 @@ public class NetworkClientSamples : MonoBehaviour
 {
     public WWWSamples www;
     public WebRequestSamples webRequest;
-    
+    public HttpWebRequestSamples httpWebRequest;
+    public SystemHttpClientSamples systemHttpClient;
+
+
     void Start()
     {
         //www.Get().Forget();
@@ -17,9 +20,11 @@ public class NetworkClientSamples : MonoBehaviour
         //webRequest.Get().Forget();
         //webRequest.Post().Forget();
 
-        var httpWebRequest = new HttpWebRequestSamples();
-        httpWebRequest.Get().Forget();
+        //httpWebRequest.Get().Forget();
         //httpWebRequest.Post().Forget();
+
+        systemHttpClient.Get().Forget();
+        systemHttpClient.Post().Forget();
     }
 
 }
