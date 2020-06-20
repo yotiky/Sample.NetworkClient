@@ -12,7 +12,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 public class WindowsHttpClientSamples : MonoBehaviour
 {
-    const string url = "http://ptsv2.com/t/a5vqa-1592557299/post";//"https://zipcloud.ibsnet.co.jp/api/search";
+    const string url = "https://zipcloud.ibsnet.co.jp/api/search";
     const string key = "zipcode";
     const int zipcode = 1040061;
     string query = $"{key}={zipcode}";
@@ -82,25 +82,22 @@ public class WindowsHttpClientSamples : MonoBehaviour
             //request.Content = byteContent;
             //request.Content.Headers.Add("Content-Type", "image/jpeg");
             //var res = await httpClient.SendRequestAsync(request);
-            //Debug.Log(res.StatusCode);
         }
         {
             // ヘッダを付けて、画像(バイナリ)を送信する場合
-            var request = new HttpRequestMessage(HttpMethod.Post, uri);
-            request.Headers.Add("foo", "hoge");
-            var file = await KnownFolders.CameraRoll.GetFileAsync("test.jpg");
-            var buffer = await FileIO.ReadBufferAsync(file);
-            var byteContent = new HttpBufferContent(buffer);
-            byteContent.Headers.Add("Content-Type", "image/jpeg");
+            //var request = new HttpRequestMessage(HttpMethod.Post, uri);
+            //request.Headers.Add("foo", "hoge");
+            //var file = await KnownFolders.CameraRoll.GetFileAsync("test.jpg");
+            //var buffer = await FileIO.ReadBufferAsync(file);
+            //var byteContent = new HttpBufferContent(buffer);
+            //byteContent.Headers.Add("Content-Type", "image/jpeg");
 
-            var data = new HttpMultipartFormDataContent();
-            data.Add(new HttpStringContent(zipcode.ToString()), key);
-            data.Add(byteContent, "file", "test.jpg");
-            request.Content = data;
+            //var data = new HttpMultipartFormDataContent();
+            //data.Add(new HttpStringContent(zipcode.ToString()), key);
+            //data.Add(byteContent, "file", "test.jpg");
+            //request.Content = data;
 
-            var res = await httpClient.SendRequestAsync(request);
-            Debug.Log($"post success. {nameof(WindowsHttpClientSamples)}.{nameof(PostRequestAsync)}");
-            Debug.Log(res.StatusCode);
+            //var res = await httpClient.SendRequestAsync(request);
         }
 
         //var response = await httpClient.PostAsync(uri, content);
