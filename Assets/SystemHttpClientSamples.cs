@@ -6,7 +6,6 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class SystemHttpClientSamples : MonoBehaviour
@@ -44,6 +43,9 @@ public class SystemHttpClientSamples : MonoBehaviour
             //var request = new HttpRequestMessage(HttpMethod.Get, url);
             //request.Headers.Add("foo", "hoge");
             //var response = await httpClient.SendAsync(request);
+
+            // または
+            //httpClient.DefaultRequestHeaders.Add("foo", "hoge");
         }
 
         var response = await httpClient.GetAsync($"{url}?{encodedQuery}");
@@ -101,6 +103,36 @@ public class SystemHttpClientSamples : MonoBehaviour
         {
             { key, zipcode.ToString() },
         });
+
+        {
+            // 画像(バイナリ)を送信する場合 (dose'nt work)
+            //var postData = new byte[0];
+            //var byteContent = new ByteArrayContent(postData);
+            //byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            //var res = await httpClient.PostAsync(url, byteContent);
+
+            //var request = new HttpRequestMessage(HttpMethod.Post, url);
+            //request.Content = byteContent;
+            //request.Content.Headers.TryAddWithoutValidation("Content-Type", "image/jpeg");
+            //var res = await httpClient.SendAsync(request);
+            //Debug.Log(res.StatusCode);
+        }
+        {
+            // ヘッダを付けて、画像(バイナリ)を送信する場合
+            //var request = new HttpRequestMessage(HttpMethod.Post, url);
+            //request.Headers.Add("foo", "hoge");
+            //var postData = new byte[0];
+            //var byteContent = new ByteArrayContent(postData);
+            ////byteContent.Headers.Add("Content-Type", "application/octet-stream");
+            //byteContent.Headers.Add("Content-Type", "image/jpeg");
+
+            //var data = new MultipartFormDataContent();
+            //data.Add(new StringContent(zipcode.ToString()), key);
+            //data.Add(byteContent, "file", "test.jpg");
+            //request.Content = data;
+            //var res = await httpClient.SendAsync(request);
+            //Debug.Log(res.StatusCode);
+        }
 
         var response = await httpClient.PostAsync(url, content);
         var text = await response.Content.ReadAsStringAsync();
