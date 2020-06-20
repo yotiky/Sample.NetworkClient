@@ -21,14 +21,14 @@ public class NetworkClientSamples : MonoBehaviour
         //webRequest.Get().Forget();
         //webRequest.Post().Forget();
 
-        //httpWebRequest.Get().Forget();
-        //httpWebRequest.Post().Forget();
+        httpWebRequest.Get().Forget();
+        httpWebRequest.Post().Forget();
 
         //systemHttpClient.Get().Forget();
         //systemHttpClient.Post().Forget();
 
         //windowsHttpClient.GetRequestAsync().Forget();
-        windowsHttpClient.PostRequestAsync().Forget();
+        //windowsHttpClient.PostRequestAsync().Forget();
     }
 
 }

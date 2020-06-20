@@ -29,32 +29,28 @@ public class WindowsHttpClientSamples : MonoBehaviour
 
         {
             // ヘッダを付ける場合
-            var request = new HttpRequestMessage(HttpMethod.Get, builder.Uri);
-            request.Headers.Add("foo", "hoge");
-            var response = await httpClient.SendRequestAsync(request);
-            
-            var text = await response.Content.ReadAsStringAsync();
-            Debug.Log($"get success. {nameof(WindowsHttpClientSamples)}.{nameof(GetRequestAsync)}");
-            Debug.Log(text);
+            //var request = new HttpRequestMessage(HttpMethod.Get, builder.Uri);
+            //request.Headers.Add("foo", "hoge");
+            //var response = await httpClient.SendRequestAsync(request);
 
             // または
             //httpClient.DefaultRequestHeaders.Add("foo", "hoge");
         }
 
-        //var response = await httpClient.GetAsync(builder.Uri);
+        var response = await httpClient.GetAsync(builder.Uri);
 
-        //if (!response.IsSuccessStatusCode)
-        //{
-        //    Debug.Log("get failure.");
-        //    Debug.Log(response.ReasonPhrase);
-        //    Debug.Log(await response.Content.ReadAsStringAsync());
-        //}
-        //else
-        //{
-        //    var text = await response.Content.ReadAsStringAsync();
-        //    Debug.Log($"get success. {nameof(WindowsHttpClientSamples)}.{nameof(GetRequestAsync)}");
-        //    Debug.Log(text);
-        //}
+        if (!response.IsSuccessStatusCode)
+        {
+            Debug.Log("get failure.");
+            Debug.Log(response.ReasonPhrase);
+            Debug.Log(await response.Content.ReadAsStringAsync());
+        }
+        else
+        {
+            var text = await response.Content.ReadAsStringAsync();
+            Debug.Log($"get success. {nameof(WindowsHttpClientSamples)}.{nameof(GetRequestAsync)}");
+            Debug.Log(text);
+        }
 #endif
     }
     public async UniTask PostRequestAsync()
@@ -67,22 +63,6 @@ public class WindowsHttpClientSamples : MonoBehaviour
 
         var uri = new Uri(url);
 
-        {
-            // 画像(バイナリ)を送信する場合 (dose'nt work)
-            // HttpBufferContentをPostは受け取れない？
-            //var file = await KnownFolders.CameraRoll.GetFileAsync("test.jpg");
-            //var buffer = await FileIO.ReadBufferAsync(file);
-            //var byteContent = new HttpBufferContent(buffer);
-            //byteContent.Headers.Add("Content-Type", "image/jpeg");
-            //var res = await httpClient.PostAsync(uri, byteContent);
-            //Debug.Log(res.StatusCode);
-
-            // HttpRequestMessageに直接入れても受け取れない？
-            //var request = new HttpRequestMessage(HttpMethod.Post, uri);
-            //request.Content = byteContent;
-            //request.Content.Headers.Add("Content-Type", "image/jpeg");
-            //var res = await httpClient.SendRequestAsync(request);
-        }
         {
             // ヘッダを付けて、画像(バイナリ)を送信する場合
             //var request = new HttpRequestMessage(HttpMethod.Post, uri);
@@ -100,10 +80,10 @@ public class WindowsHttpClientSamples : MonoBehaviour
             //var res = await httpClient.SendRequestAsync(request);
         }
 
-        //var response = await httpClient.PostAsync(uri, content);
-        //var text = await response.Content.ReadAsStringAsync();
-        //Debug.Log($"post success. {nameof(WindowsHttpClientSamples)}.{nameof(PostRequestAsync)}");
-        //Debug.Log(text);
+        var response = await httpClient.PostAsync(uri, content);
+        var text = await response.Content.ReadAsStringAsync();
+        Debug.Log($"post success. {nameof(WindowsHttpClientSamples)}.{nameof(PostRequestAsync)}");
+        Debug.Log(text);
 #endif
     }
 }

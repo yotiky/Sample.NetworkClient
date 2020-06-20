@@ -94,7 +94,7 @@ public class SystemHttpClientSamples : MonoBehaviour
         }
         {
             // Async (UniTask)
-            await PostRequestAsyncUniTask();
+            //await PostRequestAsyncUniTask();
         }
     }
     private async Task PostRequestAsync()
@@ -108,14 +108,17 @@ public class SystemHttpClientSamples : MonoBehaviour
             // 画像(バイナリ)を送信する場合 (dose'nt work)
             //var postData = new byte[0];
             //var byteContent = new ByteArrayContent(postData);
-            //byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-            //var res = await httpClient.PostAsync(url, byteContent);
+            ////byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            //byteContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+            //var res = await httpClient.PostAsync(api, byteContent);
 
+            // 画像(バイナリ)を送信する場合 (dose'nt work)
             //var request = new HttpRequestMessage(HttpMethod.Post, url);
+            //var postData = new byte[0];
+            //var byteContent = new ByteArrayContent(postData);
             //request.Content = byteContent;
-            //request.Content.Headers.TryAddWithoutValidation("Content-Type", "image/jpeg");
+            //request.Content.Headers.Add("Content-Type", "application/octet-stream");
             //var res = await httpClient.SendAsync(request);
-            //Debug.Log(res.StatusCode);
         }
         {
             // ヘッダを付けて、画像(バイナリ)を送信する場合
@@ -123,7 +126,6 @@ public class SystemHttpClientSamples : MonoBehaviour
             //request.Headers.Add("foo", "hoge");
             //var postData = new byte[0];
             //var byteContent = new ByteArrayContent(postData);
-            ////byteContent.Headers.Add("Content-Type", "application/octet-stream");
             //byteContent.Headers.Add("Content-Type", "image/jpeg");
 
             //var data = new MultipartFormDataContent();
@@ -131,7 +133,6 @@ public class SystemHttpClientSamples : MonoBehaviour
             //data.Add(byteContent, "file", "test.jpg");
             //request.Content = data;
             //var res = await httpClient.SendAsync(request);
-            //Debug.Log(res.StatusCode);
         }
 
         var response = await httpClient.PostAsync(url, content);
