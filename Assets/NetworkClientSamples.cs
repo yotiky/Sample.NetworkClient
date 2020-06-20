@@ -10,6 +10,7 @@ public class NetworkClientSamples : MonoBehaviour
     public WebRequestSamples webRequest;
     public HttpWebRequestSamples httpWebRequest;
     public SystemHttpClientSamples systemHttpClient;
+    public WindowsHttpClientSamples windowsHttpClient;
 
 
     void Start()
@@ -23,8 +24,11 @@ public class NetworkClientSamples : MonoBehaviour
         //httpWebRequest.Get().Forget();
         //httpWebRequest.Post().Forget();
 
-        systemHttpClient.Get().Forget();
-        systemHttpClient.Post().Forget();
+        //systemHttpClient.Get().Forget();
+        //systemHttpClient.Post().Forget();
+
+        //windowsHttpClient.GetRequestAsync().Forget();
+        windowsHttpClient.PostRequestAsync().Forget();
     }
 
 }
