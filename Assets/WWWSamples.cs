@@ -85,7 +85,7 @@ public class WWWSamples : MonoBehaviour
         progress.Subscribe(prog => Debug.Log(prog))
             .AddTo(this);
 
-        ObservableWWW.Get(url + query, null, progress)
+        ObservableWWW.Get(url + query, progress: progress)
             .Subscribe(
                 x => 
                 {
@@ -139,7 +139,7 @@ public class WWWSamples : MonoBehaviour
 
         {
             // 画像(バイナリ)を送信する場合
-            //var postData = new byte[0];
+            //var postData = new byte[] { 1, 2 };
             //form.AddBinaryData("image", postData, "sample.png", "image/png");
         }
         {
@@ -149,7 +149,7 @@ public class WWWSamples : MonoBehaviour
             //    { "foo", "hoge" },
             //    { "Content-Type", "application/octet-stream" },
             //};
-            //var postData = new byte[0];
+            //var postData = new byte[] { 1, 2 };
             //var www = new WWW(url, postData, header);
         }
 

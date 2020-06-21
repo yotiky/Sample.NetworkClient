@@ -7,7 +7,6 @@ using UnityEngine;
 #if WINDOWS_UWP
 using Windows.Storage;
 using Windows.Web.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
 #endif
 
 public class WindowsHttpClientSamples : MonoBehaviour

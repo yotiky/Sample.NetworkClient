@@ -94,7 +94,7 @@ public class SystemHttpClientSamples : MonoBehaviour
         }
         {
             // Async (UniTask)
-            //await PostRequestAsyncUniTask();
+            await PostRequestAsyncUniTask();
         }
     }
     private async Task PostRequestAsync()
@@ -105,26 +105,29 @@ public class SystemHttpClientSamples : MonoBehaviour
         });
 
         {
-            // 画像(バイナリ)を送信する場合 (dose'nt work)
-            //var postData = new byte[0];
+            // 画像(バイナリ)を送信する場合
+            //var postData = new byte[] { 1, 2 };
             //var byteContent = new ByteArrayContent(postData);
-            ////byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-            //byteContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
-            //var res = await httpClient.PostAsync(api, byteContent);
+            //byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+            //var res = await httpClient.PostAsync(url, byteContent);
+            //var text = await res.Content.ReadAsStringAsync();
+            //Debug.Log(text);
 
-            // 画像(バイナリ)を送信する場合 (dose'nt work)
+            // 画像(バイナリ)を送信する場合
             //var request = new HttpRequestMessage(HttpMethod.Post, url);
-            //var postData = new byte[0];
+            //var postData = new byte[] { 1, 2 };
             //var byteContent = new ByteArrayContent(postData);
             //request.Content = byteContent;
-            //request.Content.Headers.Add("Content-Type", "application/octet-stream");
+            //request.Content.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             //var res = await httpClient.SendAsync(request);
+            //var text = await res.Content.ReadAsStringAsync();
+            //Debug.Log(text);
         }
         {
             // ヘッダを付けて、画像(バイナリ)を送信する場合
             //var request = new HttpRequestMessage(HttpMethod.Post, url);
             //request.Headers.Add("foo", "hoge");
-            //var postData = new byte[0];
+            //var postData = new byte[] { 1, 2 };
             //var byteContent = new ByteArrayContent(postData);
             //byteContent.Headers.Add("Content-Type", "image/jpeg");
 
@@ -133,6 +136,8 @@ public class SystemHttpClientSamples : MonoBehaviour
             //data.Add(byteContent, "file", "test.jpg");
             //request.Content = data;
             //var res = await httpClient.SendAsync(request);
+            //var text = await res.Content.ReadAsStringAsync();
+            //Debug.Log(text);
         }
 
         var response = await httpClient.PostAsync(url, content);

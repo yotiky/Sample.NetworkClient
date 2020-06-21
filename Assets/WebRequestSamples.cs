@@ -126,7 +126,7 @@ public class WebRequestSamples : MonoBehaviour
 
         {
             // 画像(バイナリ)を送信する場合
-            //var postData = new byte[0];
+            //var postData = new byte[] { 1, 2 };
             //form.AddBinaryData("image", postData, "sample.png", "image/png");
         }
         {
@@ -134,7 +134,7 @@ public class WebRequestSamples : MonoBehaviour
             //var request = UnityWebRequest.Post(url, form);
             //request.SetRequestHeader("foo", "hoge");
             //request.SetRequestHeader("Content-Type", "application/octet-stream");
-            //var postData = new byte[0];
+            //var postData = new byte[] { 1, 2 };
             //request.uploadHandler = new UploadHandlerRaw(postData);
             //request.uploadHandler.contentType = "application/octet-stream";
             //request.downloadHandler = new DownloadHandlerBuffer();

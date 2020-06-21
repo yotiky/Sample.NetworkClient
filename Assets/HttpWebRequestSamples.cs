@@ -154,7 +154,7 @@ public class HttpWebRequestSamples : MonoBehaviour
 
             {
                 // 画像(バイナリ)を送信する場合
-                //var postData = new byte[0];
+                //var postData = new byte[] { 1, 2 };
                 //request.ContentType = "image/png";
                 //request.ContentLength = postData.Length;
                 //using(var stream = request.GetRequestStream())
@@ -166,7 +166,7 @@ public class HttpWebRequestSamples : MonoBehaviour
                 // ヘッダを付けて、画像(バイナリ)を送信する場合
                 //request.Headers.Add("foo", "hoge");
                 //request.Headers.Add("Content-Type", "application/octet-stream");
-                //var postData = new byte[0];
+                //var postData = new byte[] { 1, 2 };
                 //request.ContentType = "image/png";
                 //request.ContentLength = postData.Length;
                 //using (var stream = request.GetRequestStream())
