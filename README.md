@@ -1,5 +1,10 @@
 # Sample.NetworkClient
 
+This repository contains following samples.
+
+- Http Client sample
+- Json Serializer sample
+
 ## 開発環境
 - Unity : 2019.3.15f.1
 - UniRx : 6.2.2
