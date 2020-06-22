@@ -32,8 +32,6 @@ public class BuildProcessor : IPreprocessBuildWithReport, IPostprocessBuildWithR
 
         //    Debug.Log(process.StandardOutput.ReadToEnd());
         //    process.WaitForExit();
-
-        //    throw new BuildFailedException("stop build.");
         //}
         //finally
         //{

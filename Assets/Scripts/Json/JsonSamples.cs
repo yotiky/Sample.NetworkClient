@@ -28,7 +28,7 @@ public class JsonSamples : MonoBehaviour
         // JsonUtility : Unity純正、速いが制約多め
         var target = new PersonSerializableClassField
         {
-            id = 200,
+            id = 100,
             addresses = new AddressSerializableClassField[]
             {
                 new AddressSerializableClassField{ zipcode = 1002321, address = "hoge" },
