@@ -1,0 +1,1 @@
+utf8json_gen\Utf8Json.UniversalCodeGenerator.exe -d "Assets\Scripts" -o "Assets\Scripts\Utf8JsonGenerated.cs"
