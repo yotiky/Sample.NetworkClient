@@ -100,18 +100,23 @@ public class MessagePackSamples : MonoBehaviour
 
         Debug.Log("#Plane class like Json.NET.");
         {
+#if WINDOWS_UWP
+            Debug.Log("dose'nt work in IL2CPP");
+#else
             var target = new AddressSample3
             {
                 Zipcode = 300,
                 Address = "hogehoge"
             };
+
+            // MessagePack.Resolvers.DynamicObjectResolverAllowPrivate.Optionsを使うとプライベートメンバーにも対応
             var serialized = MessagePackSerializer.Serialize(target, MessagePack.Resolvers.ContractlessStandardResolver.Options);
             Debug.Log(MessagePackSerializer.ConvertToJson(serialized));
 
             var deserialized = MessagePackSerializer.Deserialize<AddressSample3>(serialized, MessagePack.Resolvers.ContractlessStandardResolver.Options);
             Debug.Log(MessagePackSerializer.SerializeToJson(deserialized, MessagePack.Resolvers.ContractlessStandardResolver.Options));
 
-            // MessagePack.Resolvers.DynamicObjectResolverAllowPrivate.Optionsを使うとプライベートメンバーにも対応
+#endif
         }
 
         Debug.Log("#Using interface sample.");
@@ -152,8 +157,26 @@ public class MessagePackSamples : MonoBehaviour
                 Debug.Log(MessagePackSerializer.ConvertToJson(serialized));
 
                 stream.Position = 0;
-                var deserializedFromStream = (AddressSample1)MessagePackSerializer.DeserializeAsync(typeof(AddressSample1), stream).Result;
+                var deserializedFromStream = MessagePackSerializer.DeserializeAsync<AddressSample1>(stream).Result;
                 Debug.Log(MessagePackSerializer.SerializeToJson(deserializedFromStream));
+            }
+
+            var target2 = new AddressSample2
+            {
+                Zipcode = 600,
+                Address = "fuga",
+            };
+            using (var stream = new MemoryStream())
+            {
+                MessagePackSerializer.SerializeAsync(stream, target).Wait();
+                MessagePackSerializer.SerializeAsync(stream, target2).Wait();
+                Debug.Log(MessagePackSerializer.ConvertToJson(stream.ToArray()));
+
+                stream.Position = 0;
+                var deserializedFromStream1 = MessagePackSerializer.DeserializeAsync<AddressSample1>(stream).Result;
+                Debug.Log(MessagePackSerializer.SerializeToJson(deserializedFromStream1));
+                var deserializedFromStream2 = MessagePackSerializer.DeserializeAsync<AddressSample2>(stream).Result;
+                Debug.Log(MessagePackSerializer.SerializeToJson(deserializedFromStream2));
             }
         }
     }
