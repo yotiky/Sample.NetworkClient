@@ -4,6 +4,7 @@ This repository contains following samples.
 
 - Http Client sample
 - Json Serializer sample
+- MassagePack for C# sample
 
 ## 開発環境
 - Unity : 2019.3.15f.1
