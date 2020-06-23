@@ -13,3 +13,4 @@ This repository contains following samples.
 - MRTK : 2.4.0
 - Json.NET：12.0.3
 - Utf8Json：1.3.7.1
+- MessagePack for C#：2.1.143
