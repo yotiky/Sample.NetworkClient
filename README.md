@@ -4,6 +4,7 @@ This repository contains following samples.
 
 - Http Client sample
 - Json Serializer sample
+- MassagePack for C# sample
 
 ## 開発環境
 - Unity : 2019.3.15f.1
@@ -13,3 +14,4 @@ This repository contains following samples.
 - MRTK : 2.4.0
 - Json.NET：12.0.3
 - Utf8Json：1.3.7.1
+- MessagePack for C#：2.1.143
