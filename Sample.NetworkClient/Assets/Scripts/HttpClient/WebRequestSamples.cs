@@ -67,6 +67,8 @@ public class WebRequestSamples : MonoBehaviour
                 // Utf8Json : neuecc作、JsonUtilityと同じくらいの速さで汎用的
                 //var data = Utf8Json.JsonSerializer.Deserialize<ResponseData>(request.downloadHandler.text);
 
+                // Fileなどのバイナリをダウンロードした場合
+                //var data = request.downloadHandler.data;
             }
         }
     }

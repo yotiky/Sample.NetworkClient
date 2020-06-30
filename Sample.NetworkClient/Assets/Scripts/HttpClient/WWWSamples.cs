@@ -60,6 +60,9 @@ public class WWWSamples : MonoBehaviour
                 //var data = Newtonsoft.Json.JsonConvert.DeserializeObject<ResponseData>(www.text);
                 // Utf8Json : neuecc作、JsonUtilityと同じくらいの速さで汎用的
                 //var data = Utf8Json.JsonSerializer.Deserialize<ResponseData>(www.text);
+
+                // Fileなどのバイナリをダウンロードした場合
+                //var data = www.bytes;
             }
         }
     }

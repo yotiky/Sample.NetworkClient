@@ -21,7 +21,7 @@ public class HttpWebRequestSamples : MonoBehaviour
     {
         // Callback
         GetRequestCallback();
-
+        
         // Observable
         GetRequestObservable1();
 
@@ -52,11 +52,27 @@ public class HttpWebRequestSamples : MonoBehaviour
                     else
                     {
                         Debug.Log($"get success. {nameof(HttpWebRequestSamples)}.{nameof(GetRequestCallback)}");
-                        using (var reader = new StreamReader(response.GetResponseStream()))
+                        using (var stream = response.GetResponseStream())
+                        using (var reader = new StreamReader(stream))
                         {
                             var text = reader.ReadToEnd();
                             Debug.Log(text);
                         }
+
+                        //// Fileなどのバイナリをダウンロードした場合
+                        //// response.GetResponseStream() で取れる Strem(ConnectStream) の読み込みは1度きり
+                        //// 2回以上は一旦 MemoryStream に読み込むなどが必要
+                        //// https://stackoverflow.com/questions/39181211/how-to-read-httpwebresponse-twice
+                        //using (var stream = response.GetResponseStream())
+                        //using (var ms = new MemoryStream())
+                        //using (var fs = new FileStream("hoge.png", FileMode.Create))
+                        //{
+                        //    // Memory に読み込む場合
+                        //    stream.CopyTo(ms);
+                        //    var data = ms.ToArray();
+                        //    // ファイルに書き出す場合
+                        //    stream.CopyTo(fs);
+                        //}
                     }
                 },
                 null);

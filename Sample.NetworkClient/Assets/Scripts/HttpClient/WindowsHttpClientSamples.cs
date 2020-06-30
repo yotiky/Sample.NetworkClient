@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Web;
 using UnityEngine;
 #if WINDOWS_UWP
@@ -49,6 +50,14 @@ public class WindowsHttpClientSamples : MonoBehaviour
             var text = await response.Content.ReadAsStringAsync();
             Debug.Log($"get success. {nameof(WindowsHttpClientSamples)}.{nameof(GetRequestAsync)}");
             Debug.Log(text);
+
+            //// Fileなどのバイナリをダウンロードした場合
+            //// Memory に読み込む場合
+            //var buffer = await response.Content.ReadAsBufferAsync();
+            //var data = buffer.ToArray();
+            //// ファイルに書き出す場合
+            //var file = await KnownFolders.CameraRoll.CreateFileAsync("hoge.png", CreationCollisionOption.ReplaceExisting);
+            //await FileIO.WriteBufferAsync(file, buffer);
         }
 #endif
     }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -72,6 +73,15 @@ public class SystemHttpClientSamples : MonoBehaviour
                 //var data = Newtonsoft.Json.JsonConvert.DeserializeObject<ResponseData>(html);
                 // Utf8Json : neuecc作、JsonUtilityと同じくらいの速さで汎用的
                 //var data = Utf8Json.JsonSerializer.Deserialize<ResponseData>(html);
+
+                //// Fileなどのバイナリをダウンロードした場合
+                //// Memory に読み込む場合
+                //var data = await response.Content.ReadAsByteArrayAsync();
+                //// ファイルに書き出す場合
+                //using (var fs = new FileStream("hoge.png", FileMode.Create))
+                //{
+                //    await response.Content.CopyToAsync(fs);
+                //}
             }
         }
     }
